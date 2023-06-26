@@ -1,10 +1,14 @@
 function compareArrays(arr1, arr2) {
-    for ( let element of arr1 ){
-    }
-     for (let element of arr2){
-     }
-     return arr1.every((element, index) => element !== arr2[index]);
-   }
+ if (arr1.length !== arr2.length) {
+  return false;
+ }
+ for(let element of arr1)
+  if (arr1[element] !== arr2[element]) {
+    return false;
+  }
+ 
+     return arr1.every((element, index) => element === arr2[index]);
+}
    
     let result = compareArrays([1,2,3,4,5,6], [1,2,3,4,5,6]);
    
