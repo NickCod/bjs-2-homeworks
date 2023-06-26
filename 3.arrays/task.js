@@ -29,10 +29,11 @@ function compareArrays(arr1, arr2) {
   ];
 
   function getUsersNamesInAgeRange(users, gender) {
-    const filteredUsers = users.filter(user => user.gender === gender);
-    const ages = filteredUsers.map(user => user.age);
-    const sumOfAges = ages.reduce((acc, age) => acc + age, 0);
-    const averageAge = sumOfAges / ages.length;
+    const averageAge = users
+      .filter(user => user.gender === gender)
+      .map(user => user.age)
+      .reduce((acc, age, index, arr) => acc + age / arr.length, 0);
+    
     return averageAge;
   }
   
