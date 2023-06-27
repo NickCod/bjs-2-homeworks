@@ -13,7 +13,7 @@ Student.prototype.setSubject = function (subjectName) {
 }
 
 Student.prototype.addMarks = function (...marks) {
-  if (this.hasOwnProperty('marks')) {
+  if (this.hasOwnProperty('marks') === true)  {
     this.marks.push(...marks);
   } else {
     this.marks = [...marks];
@@ -30,9 +30,11 @@ Student.prototype.getAverage = function () {
  }
 }
 
-Student.prototype.exclude = function (reason) {
+Student.prototype.exclude = function(reason) {
+  if (!this.marks || Object.keys(this.marks).length === 0) {
     delete this.subject;
     delete this.marks;
-    this.excludes = reason;
-    }
+    this.excluded = reason;
+  }
+};
   
