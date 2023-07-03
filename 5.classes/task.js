@@ -25,41 +25,39 @@ class PrintEditionItem {
 }
 
 class Magazine extends PrintEditionItem {
-    constructor(type) {
-        super(type);
-      this.type = "magazine";
-    }
+  constructor(name, releaseDate, pagesCount) {
+    super(name, releaseDate, pagesCount)
+    this.type = "magazine";
+  }
 }
-
 class Book extends PrintEditionItem {
-    constructor(author,name,releaseDate,pagesCount){
-    super(name,releaseDate,pagesCount);
-      this.author = author;
-      this.type = "book";
-    }
+  constructor(author, name, releaseDate, pagesCount) {
+    super(name, releaseDate, pagesCount)
+    this.type = "book";
+    this.author = author;
+  }
 }
-
 class NovelBook extends Book {
-    constructor(type){
-        super(type);
-        this.type = "novel";
-    }
+  constructor(author, name, releaseDate, pagesCount) {
+    super(author, name, releaseDate, pagesCount)
+    this.type = "novel";
+  }
 }
 class FantasticBook extends Book {
-    constructor(type){
-        super(type);
-        this.type = "fantastic";
-    }
+  constructor(author, name, releaseDate, pagesCount) {
+    super(author, name, releaseDate, pagesCount)
+    this.type = "fantastic";
+  }
 }
 class DetectiveBook extends Book {
-    constructor(type){
-        super(type);
-        this.type = "detective";
-    }
+  constructor(author, name, releaseDate, pagesCount) {
+    super(author, name, releaseDate, pagesCount)
+    this.type = "detective";
+  }
 }
 
 class Library {
-    constructor(name,books){
+    constructor(name){
         this.name = name;
         this.books = [];
     }
@@ -70,13 +68,13 @@ class Library {
       return this.books;
     }
     findBookBy(type, value) {
-      return this.books.filter((element) => element[type] === value) || null;
+      return this.books.find((element) => element[type] === value) || null;
      }   
     
     giveBookByName(bookName){
-     let index = this.books.filter((element)=> element.name === bookName);
+     let index = this.books.findIndex((book) => book.name === bookName);
       if (index !== -1) {
-        return this.books.splice(index,1);
+        return this.books.splice(index,1)[0];
       } else {
         return null;
       }
