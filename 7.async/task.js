@@ -1,23 +1,41 @@
-class AlarmCLock {
+class AlarmClock {
     constructor(){
-    this.alarmcollection = [];
-    this.intervalid;
+    this.alarmCollection = [];
+    this.intervalId = null;
     }
 
-    addClock(time,toAddCLock){
+    addClock(time,callback){
     this.time = time;
-    this.toAddClock = toAddCLock;
-    if (this.time || this.toAddCLock === undefined) {//(!this.time || !this.toAddCLock )- Можно ли так установить проверку ?
+    this.callback = callback;
+    if (!this.time || !this.callback) {//(this.time || this.toAddCLock ===undefinde )- Можно ли так установить проверку ?
      throw new Error ('Отсутствуют обязательные аргументы');
       }
-    const alarm = {// зачем нам вообще нужен этот объект ?
-    time: time,
-    toAddCLock: toAddCLock
-    };
-    const existedIndex = this.alarmcollection.findIndex(alarm => alarm.time === time); //как мы здесь понимаем какой контекст будет у свойства time ?
-    if(existedIndex){
+    const existedIndex = this.alarmCollection.findIndex(alarm => alarm.time === time); //как мы здесь понимаем какой контекст будет у свойства time ?
+    if(existedIndex !== -1){
         console.warn('Уже присутствует звонок на это же время');
+        this.alarmCollection.push({callback,time,canCall:true});
     }
-    this.alarmcollection.push(new Array(callback,time,cancall = true));
+    }
+    removeClock(time){
+   this.alarmCollection = this.alarmCollection.filter(alarm => alarm.time != time);
+    }
+    getCurrentFormattedTime(){
+     let now = new Date();
+     let hours = now.getHours();
+     let minutes = now.getMinutes();
+     return hours + ":" + minutes;
+    }
+    start(){
+     if (this.intervalId !== null){
+    this.intervalId = setInterval(()=>{
+      this.alarmCollection.forEach((alarm)=>{
+        if(alarm.time === this.getCurrentFormattedTime && canCall === true){
+         alarm.canCall = false;  
+         alarm.callback(); 
+        }
+      })  
+    })
+     } 
+     return null;
     }
 }
