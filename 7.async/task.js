@@ -46,7 +46,7 @@ class AlarmClock {
       this.alarmCollection.forEach(alarm => alarm.canCall === true);
     }
     clearAlarms(){
-      this.alarmCollection === [];
+      this.alarmCollection = [];
       return this.stop();
     }
 }
