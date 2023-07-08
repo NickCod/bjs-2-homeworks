@@ -34,8 +34,19 @@ class AlarmClock {
          alarm.callback(); 
         }
       })  
-    })
+    }, 1000)
      } 
      return null;
+    }
+    stop(){
+       clearInterval(this.intervalId); // ID имеет значение либо true либо false, как происходит взаимодействие ведь очистка интервала должно принимать значение самого интервала ?
+       this.intervalId = null;
+    }
+    resetAllCalls() {
+      this.alarmCollection.forEach(alarm => alarm.canCall === true);
+    }
+    clearAlarms(){
+      this.alarmCollection === [];
+      return this.stop();
     }
 }
