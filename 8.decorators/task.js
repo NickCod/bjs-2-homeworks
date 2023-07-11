@@ -22,19 +22,22 @@ function cachingDecoratorNew(func) {
 //Задача № 2
 function debounceDecoratorNew(func, delay) {
   let timeoutId = null; //null = false
-  function wrapper (_count, ...args){
-    wrapper.count = wrapper.count || 0;
-    if(!timeoutId){
-        console.log(func(...args)); 
-        wrapper.count++;
-    } else {
-      clearInterval(timeoutId);
-    }
-    timeoutId = setTimeout(()=> {
-        timeoutId = null;
-        console.log(func(...args));
-    }, delay)
-  };
+
+ function wrapper(...args) {
+  if(!timeoutId){
+  func(...args);
+  wrapper.count++;
+}
+   wrapper.allCount++;
+
+  clearTimeout(timeoutId);
+  timerId = setTimeout(()=>{
+   func(...args);
+   wrapper.count++;
+  }, delay)
+  }
   wrapper.count = 0;
+  wrapper.allCount = 0;
+
   return wrapper;
 }
